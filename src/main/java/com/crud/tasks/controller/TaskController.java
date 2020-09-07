@@ -1,8 +1,6 @@
 package com.crud.tasks.controller;
 import com.crud.tasks.domain.TaskDto;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +24,12 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
-    public TaskDto updateTask(TaskDto task) {
+    public TaskDto updateTask(@RequestBody TaskDto task) {
         return new TaskDto(1L, "Edited test title", "Test _content");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTask")
-    public void createTask(TaskDto taskDto) {
+    public void createTask(@RequestBody TaskDto taskDto) {
     }
 
 }
