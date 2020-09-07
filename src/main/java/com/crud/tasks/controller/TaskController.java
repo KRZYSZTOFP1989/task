@@ -13,12 +13,12 @@ public class TaskController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getTasks")
     public List<TaskDto> getTasks() {
-        return new ArrayList;
+        return new ArrayList<>();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
     public TaskDto getTask(Long taskId) {
-        return new TaskDto(1L, "test title", "test _content")
+        return new TaskDto(1L, "test title", "test _content");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
@@ -26,8 +26,8 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
-    public TaskDto updateTask(TaskDto task) {GIT
-        return new TaskDto(1L, "Edited test title", "Test _content")
+    public TaskDto updateTask(TaskDto task) {
+        return new TaskDto(1L, "Edited test title", "Test _content");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTask")
