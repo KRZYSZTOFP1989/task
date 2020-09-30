@@ -12,5 +12,6 @@ echo.
 echo There were errors
 
 :end
+echo.
 echo End work
 
