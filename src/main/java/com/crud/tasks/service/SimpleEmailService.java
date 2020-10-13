@@ -33,14 +33,15 @@ public class SimpleEmailService {
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
-        mailMessage.setCc(mail.getToCc());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
 
-        if (mail.getToCc().isEmpty()) {
+        String toCc = mail.getToCc();
+
+        if (toCc == null || toCc.isEmpty()) {
             LOGGER.info("No other recipient has been set");
         } else {
-            javaMailSender.send(mailMessage);
+            mailMessage.setCc(toCc);
         }
 
         return mailMessage;
