@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class EmailScheduler {
 
     public static final String SUBJECT = "Tasks: Once a day email";
+    public static String MESSAGE = "Currently in database you got: ";
 
     @Autowired
     private SimpleEmailService simpleEmailService;
@@ -27,16 +28,18 @@ public class EmailScheduler {
     public void sendInformationEmail() {
 
         long size = taskRepository.count();
+        String messageTask = size  + " task";
+        String messageTasks = size  + " tasks";
 
-        if(size == 1) {
-            simpleEmailService.send(new Mail(
-                    adminConfig.getAdminMail(),
-                    "", SUBJECT,
-                    "Currently in database you got: " + size + " task"));
-        } else
+        if (size == 1) {
+            MESSAGE = MESSAGE + messageTask;
+        } else {
+            MESSAGE = MESSAGE + messageTasks;
+        }
+
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminMail(),
-                "", SUBJECT,
-                "Currently in database you got: " + size + " tasks"));
+                "", SUBJECT, MESSAGE));
     }
+
 }
