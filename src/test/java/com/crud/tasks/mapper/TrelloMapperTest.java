@@ -96,7 +96,7 @@ public class TrelloMapperTest {
     public void mapToCardDtoTest() {
 
         //Given
-        TrelloCard trelloCard = new TrelloCard("Test", "Test description", "1", "1");
+        TrelloCard trelloCard = new TrelloCard("Test", "Test description", "1", "1", null);
 
         //When
         TrelloCardDto trelloCardDto = trelloMapper.mapToCardDto(trelloCard);
@@ -112,7 +112,10 @@ public class TrelloMapperTest {
     public void mapToCardTest() {
 
         //Given
-        TrelloCardDto trelloCardDto = new TrelloCardDto("Test", "Test description", "1", "1");
+        TrelloTrelloDto trelloTrelloDto = new TrelloTrelloDto(5, 10);
+        TrelloAttachmentsByTypeDto trelloAttachmentsByTypeDto = new TrelloAttachmentsByTypeDto(trelloTrelloDto);
+        TrelloBadgesDto trelloBadgesDto = new TrelloBadgesDto(20, trelloAttachmentsByTypeDto);
+        TrelloCardDto trelloCardDto = new TrelloCardDto("Test", "Test description", "1", "1", trelloBadgesDto);
 
         //When
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
@@ -122,6 +125,18 @@ public class TrelloMapperTest {
         assertEquals(trelloCardDto.getDescription(), trelloCard.getDescription());
         assertEquals(trelloCardDto.getPos(), trelloCard.getPos());
         assertEquals(trelloCardDto.getListId(), trelloCard.getLisId());
+
+        TrelloBadgesDto expectedBagdes = trelloCardDto.getBadges();
+        TrelloBadgesDto actualBagdes = trelloCard.getBadges();
+        assertEquals(expectedBagdes, actualBagdes);
+        assertEquals(expectedBagdes.getVotes(), actualBagdes.getVotes());
+
+        TrelloAttachmentsByTypeDto expectedAttachment = expectedBagdes.getAttachmentsByType();
+        TrelloAttachmentsByTypeDto actualAttachment = actualBagdes.getAttachmentsByType();
+        assertEquals(expectedAttachment, actualAttachment);
+        assertEquals(expectedAttachment.getTrello(), actualAttachment.getTrello());
+        assertEquals(expectedAttachment.getTrello().getBoard(), actualAttachment.getTrello().getBoard());
+        assertEquals(expectedAttachment.getTrello().getCard(), actualAttachment.getTrello().getCard());
     }
 
 }
