@@ -11,4 +11,9 @@ public class AdminConfig {
     @Value("${admin.mail}")
     private String adminMail;
 
+    @Value("Kodilla User")
+    private String adminName;
+
+    @Value("TaksCrudCreator")
+    private String adminCompany;
 }
