@@ -16,4 +16,8 @@ public class AdminConfig {
 
     @Value("TaksCrudCreator")
     private String adminCompany;
+
+    @Value("Taks Application")
+    private String appName;
+
 }
