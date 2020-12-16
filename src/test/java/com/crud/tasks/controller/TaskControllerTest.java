@@ -49,7 +49,7 @@ public class TaskControllerTest {
         when(taskMapper.mapToTaskDtoList(service.getAllTasks())).thenReturn(listTasksDto);
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTasks")
+        mockMvc.perform(get("/tasks/")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 //Task fields
@@ -70,7 +70,7 @@ public class TaskControllerTest {
         when(service.getTask(1L)).thenReturn(Optional.of(task));
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTask")
+        mockMvc.perform(get("/tasks/{taskId}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("taskId", "1"))
                 .andExpect(status().isOk())
@@ -94,7 +94,7 @@ public class TaskControllerTest {
         String jsonContent = gson.toJson(taskDto);
 
         //When & Then
-        mockMvc.perform(put("/v1/task/updateTask")
+        mockMvc.perform(put("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
@@ -118,7 +118,7 @@ public class TaskControllerTest {
         String jsonContent = gson.toJson(taskDto);
 
         //When & Then
-        mockMvc.perform(post("/v1/task/createTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(post("/tasks/").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk());
@@ -136,7 +136,7 @@ public class TaskControllerTest {
         when(service.getTask(1L)).thenReturn(Optional.of(task));
 
         //When & Then
-        mockMvc.perform(delete("/v1/task/deleteTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(delete("/tasks/{taskId}").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .param("taskId", "1"))
                 .andExpect(status().isOk());
